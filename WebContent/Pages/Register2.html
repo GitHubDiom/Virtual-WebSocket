@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Title</title>
+</head>
+<script type="text/javascript" src="js/jquery-3.1.0.min.js"></script>
+<style>
+body {
+	background: #ff8117 url("images/header.png") repeat fixed;
+}
+
+.text-center {
+	text-align: center;
+}
+
+.text-right {
+	text-align: right;
+}
+
+.hidden {
+	display: none;
+}
+
+.show {
+	display: block;
+}
+
+.margin-top-100 {
+	padding-top: 50px;
+	padding-bottom: 50px;
+	width: 60%;
+	margin-top: 100px;;
+	border-radius: 10px;
+	background-color: aliceblue;
+}
+
+table tr {
+	height: 30px;
+	margin-top: 25px;
+	font-size: 20px;
+	width: 150px;;
+}
+
+table {
+	width: 100%;
+	background-color: aliceblue;
+}
+
+/*margin-top: 15px;*/
+/*}*/
+table tr:last-child td {
+	height: 60px;
+}
+
+.btn {
+	background-color: #5442ff;
+	font: bold 12px/20px arial, sans-serif;
+	padding-right: 10px;
+	padding-left: 10px;
+}
+
+.vertical-middle {
+	vertical-align: middle;
+}
+
+.registerDiv {
+	width: 50%;
+}
+
+#loginDiv {
+	height: 200px;
+}
+
+table td {
+	width: 150px;
+}
+</style>
+<body>
+	<script type="text/javascript" src="js/jquery-3.1.0.min.js"></script>
+
+
+	<div align="center" class="margin-top-100 text-center"
+		style="margin-left: 20%">
+		<!--<input type="button" value="快速登录" id="loginShow">-->
+		<!--<input type="button" value="快速注册" id="registerShow">-->
+		<a id="loginShow">快速登录</a> <a id="registerShow">快速注册</a>
+		<div id="loginDiv" align="center">
+			<table>
+				<tr>
+					<td>用户名:</td>
+					<td><input type="text" id="userLogin"></td>
+				</tr>
+				<tr>
+					<td>密码:</td>
+					<td><input type="password" id="pwdLogin"></td>
+				</tr>
+				<tr>
+					<td colspan="2"><input type="button" id="loginBtn" value="登录"
+						style="width: 100%; height: 40px"></td>
+				</tr>
+			</table>
+		</div>
+		<div id="registerDiv">
+			<table>
+				<tr class="text-center">
+					<td colspan="3"><span>提示文本</span></td>
+				</tr>
+				<tr>
+					<td class="text-right">用户名:</td>
+					<td><input type="text" id="userName"></td>
+					<td><span style="color: red"></span></td>
+				</tr>
+				<tr>
+					<td class="text-right">密码:</td>
+					<td><input type="text" id="pwd"></td>
+					<td><span style="color: red"></span></td>
+				</tr>
+				<tr>
+					<td class="text-right">确认密码:</td>
+					<td><input type="text" id="conPwd"></td>
+					<td><span style="color: red"></span></td>
+				</tr>
+				<tr>
+					<td class="text-right">Email:</td>
+					<td><input type="text" id="qq"></td>
+					<td><span style="color: red"></span></td>
+				</tr>
+				<tr>
+					<td colspan="3" class="text-center"><input id="regBtn"
+						type="button" class="btn vertical-middle" value="同意协议并注册">&nbsp;
+						<a href="#" class="vertical-middle">注册协议</a></td>
+				</tr>
+			</table>
+		</div>
+	</div>
+	<script>
+    //拿到快速登陆，快速注册的<a>标签
+    var loginShow = document.getElementById("loginShow");
+    var registershow = document.getElementById("registerShow");
+    //隐藏注册dic
+    document.getElementById("registerDiv").style.display = "none";
+    //快速登陆的字体
+    loginShow.style.color = 'green';
+    loginShow.style.textDecoration = 'underline ';
+    //快速注册去掉下划线
+    registershow.style.textDecoration = "none";
+    //快速登录的事件
+    loginShow.onclick = function () {
+        //先拿到2个div
+        var loginDiv = document.getElementById("loginDiv");
+        var registerDiv = document.getElementById("registerDiv");
+        //添加下划线
+        loginShow.style.textDecoration = 'underline ';
+        //快速注册去掉下划线
+        registershow.style.textDecoration = "none";
+        //修改字体
+        loginShow.style.color = 'green';
+        registershow.style.color = 'black';
+        //对应的div显示隐藏操作
+        loginDiv.style.display = "block";
+        registerDiv.style.display = "none";
+
+    };
+    registershow.onclick = function () {
+        registershow.style.color = 'green'
+        loginShow.style.color = 'black';
+        registershow.style.textDecoration = 'underline ';
+        loginShow.style.textDecoration = "none";
+        var loginDiv = document.getElementById("loginDiv");
+        var registerDiv = document.getElementById("registerDiv");
+        loginDiv.style.display = 'none';
+        registerDiv.style.display = 'block';
+    }
+
+    var spans = document.getElementsByTagName("span");
+    spans[0].className ='hidden';
+    spans[0].style.color='red';
+    //找到按钮
+    var regBtn = document.getElementById("regBtn");
+    regBtn.onclick = function () {
+        var nameText = document.getElementById("userName");
+        var pwdText = document.getElementById("pwd");
+        var confirPwd = document.getElementById("conPwd");
+        var qq = document.getElementById("qq");
+        var nameString = nameText.value;
+        var pwdString = pwdText.value;
+        var conPwdStrig = confirPwd.value;
+        var qqString = qq.value;
+
+        var nameReg = /^[A-Z]{5,11}$/;
+        var nameWarn = isNoEmptyAndReg(nameReg, nameString);
+        
+        spans[1].innerHTML = nameWarn;
+
+        var pwdReg = /^\w+$/;
+        var pwdWarn = isNoEmptyAndReg(pwdReg, pwdString);
+        //console.info(spans[2].innerHTML = pwdWarn);
+
+        if(pwdString != conPwdStrig){
+            pwdWarn = "两次密码输入不一致!"
+        }
+        //console.info(spans[3].innerHTML = pwdWarn);
+
+        var qqReg = /^[0-9]+$/;
+        var qqWarn = isNoEmptyAndReg(qqReg, qqString);
+        //console.info(spans[4].innerHTML = qqWarn);
+
+        if(qqWarn==""&&pwdWarn==""&&nameWarn==""){
+        	spans[0].className ='hidden';
+            $.ajax({
+           	 url: "http://127.0.0.1:8080/WebProject2/RegisterServlet",
+                type:"post",
+                async:true,//true是异步（默认），false是同步
+                data:{
+                    "name":$("#userName").val(),
+                    "pwd":$("#pwd").val(),
+                    "email":$("#qq").val()
+                    },
+                success: function(data){
+                    //若后台传json对象，则data为json对象
+                   //则不需 jQuery.parseJSON(data)
+                   var json = jQuery.parseJSON(data);
+                  if(json.flag){
+                      //alert("注册成功");
+                	  spans[0].innerHTML = "注册成功";
+                	  spans[0].style.color='green';
+                	  setTimeout(function(){
+                		  var loginDiv = document.getElementById("loginDiv");
+                	        var registerDiv = document.getElementById("registerDiv");
+                	        //添加下划线
+                	        loginShow.style.textDecoration = 'underline ';
+                	        //快速注册去掉下划线
+                	        registershow.style.textDecoration = "none";
+                	        //修改字体
+                	        loginShow.style.color = 'green';
+                	        registershow.style.color = 'black';
+                	        //对应的div显示隐藏操作
+                	        loginDiv.style.display = "block";
+                	        registerDiv.style.display = "none";
+                    	  }, 1000);
+                      }else{
+                   	   //alert("注册失败");
+                    	  spans[0].innerHTML = "注册失败";
+                    	  spans[0].style.color='red';
+                   	   }
+                  spans[0].className='show';
+                },
+                error:function(){
+                    //执行失败之后的代码
+                    alert("请求失败");
+                },
+               });
+        }else{
+            return false;
+        }
+        
+    }
+
+
+    function isNoEmpty(str) {
+        if (str == "") {
+            return true;
+        } else
+            return false;
+    }
+    function isNoEmptyAndReg(reg, str) {
+        if (str == "") {
+            return "不能为空!"
+        } else {
+            if (reg.test(str)) {
+                return "";
+            } else {
+                return "格式不正确!";
+            }
+        }
+    }
+
+    $("#loginBtn").click(function(){
+        	$.ajax({
+              	 url: "http://127.0.0.1:8080/WebProject2/LoginServlet",
+                   type:"post",
+                   async:true,//true是异步（默认），false是同步
+                   data:{
+                       "name":$("#userLogin").val(),
+                       "pwd":$("#pwdLogin").val(),
+                       },
+                   success: function(data){
+                       //若后台传json对象，则data为json对象
+                      //则不需 jQuery.parseJSON(data)
+                      var json = jQuery.parseJSON(data);
+                     if(json.flag){
+                         alert("登录成功");
+                         }else{
+                      	   alert("登录失败");
+                      	   }
+                   },
+                   error:function(){
+                       //执行失败之后的代码
+                       alert("请求失败");
+                   },
+            });
+        });
+</script>
+</body>
+</html>

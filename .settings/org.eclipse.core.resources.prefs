@@ -1,0 +1,10 @@
+eclipse.preferences.version=1
+encoding//WebContent/js/websocket.js=UTF-8
+encoding//WebContent/login.html=UTF-8
+encoding//src/servlets/AddGroup.java=UTF-8
+encoding//src/servlets/GetStranger.java=UTF-8
+encoding//src/utils/SqlUtil.java=UTF-8
+encoding//src/utils/websocketutls/WebSocketMessageInbound.java=UTF-8
+encoding//src/utils/websocketutls/WebSocketMessageInboundPool.java=GBK
+encoding//src/utilsImp/SaveContentImp.java=UTF-8
+encoding//src/utilsImp/UserUtilImp.java=UTF-8
